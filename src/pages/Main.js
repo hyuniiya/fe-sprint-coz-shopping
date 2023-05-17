@@ -1,17 +1,26 @@
-
-
+import { useState, useEffect } from "react";
+import ProductList from "../components/ProductList";
 import styled from "styled-components";
 
-
-export const MainContainer = styled.main`
+const MainContainer = styled.section`
     width: 100%;
-    max-width: 92rem;
+    max-width: 82rem;
     margin: 0 auto;
-    
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 `;
 
-const Main = ({ products, isLoading }) => {
-    return <div>Main</div>
+const Main = () => {
+    return (
+    <MainContainer>
+      <ProductList />
+    </MainContainer>
+  )
 };
+  
+  export default Main;
 
-export default Main;
+
+
+

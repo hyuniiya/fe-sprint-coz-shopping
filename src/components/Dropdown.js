@@ -11,6 +11,7 @@ export const DropdownMenu = styled.nav `
     top: 5rem;
     right: 4rem;
     
+    
     :after { 
         content:""; 
         position: absolute; 
@@ -30,6 +31,7 @@ export const DropdownMenu = styled.nav `
     background-color: #fff;
     box-shadow: 0px -2px 8px 5px rgba(0, 0, 0, 0.1);
     -webkit-box-shadow: 0px -2px 8px 5px rgba(0, 0, 0, 0.1);
+    
 
 
     > li {

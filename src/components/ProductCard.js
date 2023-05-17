@@ -10,19 +10,19 @@ export const ItemContainer = styled.div`
     display: flex;
     flex-direction: column;
     width: calc(100% / 4);
-    height: 15rem;
+    height: 16rem;
 
   .img {
     position: relative;
     width: 18rem;
-    height: 15rem;
+    height: 16rem;
     border: 1px solid rgba(0, 0, 0, 0.1);
     border-radius: 1.2rem;
     cursor: pointer;
 
     img {
       width: 20rem;
-      height: 15rem;
+      height: 16rem;
       border-radius: 1.2rem;
     }
 
@@ -42,6 +42,8 @@ export const ItemContainer = styled.div`
     font-weight: 800;
     font-size: 1.2rem;
     line-height: 19px;
+    margin-top: 0.7rem;
+    margin-left: 1rem;
     cursor: pointer;
   }
 
@@ -57,6 +59,8 @@ export const ItemContainer = styled.div`
     font-weight: 400;
     font-size: 1rem;
     line-height: 19px;
+    margin-top: 0.5rem;
+    margin-left: 1rem;
   }
 
   #right {
@@ -73,6 +77,12 @@ const ProductCard = ({data}) => {
     else if (data.type === 'Brand') content = <div>{data.brand_name}</div>;
     else content = <div>{data.title}</div>;
 
+    const numberComma =(number) => {
+        return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+      };
+
+    const CommaPrice = data.price ? numberComma(data.price) : "";
+    const CommaFollower = data.follower ? numberComma(data.follower) : "";
     return (
           <ItemContainer>
             <div className="img">
@@ -88,8 +98,8 @@ const ProductCard = ({data}) => {
             </div>
     
             {data.sub_title && <p>{data.sub_title}</p>}
-            {data.price && <p id="right">{`${data.price}원`}</p>}
-            {data.follower && <p id="right">{data.follower}</p>}
+            {data.price && <p id="right">{`${CommaPrice}원`}</p>}
+            {data.follower && <p id="right">{CommaFollower}</p>}
           </ItemContainer>
       )};
 

@@ -2,19 +2,23 @@ import { useEffect, useState } from "react";
 import ItemList from "./ItemList";
 import styled from "styled-components";
 
-const Label = styled.div`
-  width: 179px;
-  height: 38px;
+const ProductListContainer = styled.div`
   display: flex;
   align-items: center;
-  font-family: "Inter";
-  font-style: normal;
   font-weight: 600;
   font-size: 24px;
   line-height: 29px;
-  
+  color: #000;
+  margin-top: 3rem;
 
-  color: #000000;
+    h2 {
+        top: 8rem;
+        left: 10rem;
+        position: absolute;
+        transform: translateX(10%);
+        font-weight: 600;
+
+    }
 `;
 
 export default function ProductList() {
@@ -39,16 +43,15 @@ export default function ProductList() {
     };
   
     return (
-      <>
-        <Label>상품 리스트</Label>
+        <ProductListContainer>
+        <h2>상품 리스트</h2>
         {isLoading ? (
-          <div>Loading</div>
+          <p>Loading...</p>
         ) : (
-          <ItemList products={products} />
+          <ItemList products={products.slice(0, 4)} />
         )}
-      </>
+      </ProductListContainer>
     );
-  }
-  
+  };
   
 

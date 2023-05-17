@@ -5,44 +5,63 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faStar } from "@fortawesome/free-solid-svg-icons";
 
 export const ItemContainer = styled.div`
+    left: -5rem; 
     position: relative;
     display: flex;
     flex-direction: column;
-    width: 10rem;
-    height: 12rem;
+    width: calc(100% / 4);
+    height: 15rem;
 
-        img {
-            box-sizing: border-box;
-            width: 10rem;
-            height: 12rem;
-            border: 1px solid rgba(0, 0, 0, 0.1);
-            border-radius: 12px;
-            cursor: pointer;
-        }
-        
-        .first {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-top: 4px;
-            font-weight: 800;
-            font-size: 1rem;
-            line-height: 19px;
-            cursor: pointer;
-        }
-            span {
-                color: #452cdd;
-            }
+  .img {
+    position: relative;
+    width: 18rem;
+    height: 15rem;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    border-radius: 1.2rem;
+    cursor: pointer;
 
-        p {
-            display: flex;
-            align-items: center;
-            justify-content: flex-start;
-            margin-top: 4px;
-            font-weight: 400;
-            font-size: 1rem;
-            line-height: 19px;
-        }    
+    img {
+      width: 20rem;
+      height: 15rem;
+      border-radius: 1.2rem;
+    }
+
+    #icon {
+      position: absolute;
+      bottom: 1rem;
+      right: -0.5rem;
+      color: rgba(223, 223, 223, 0.81);
+    }
+  }
+
+  .first {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 4px;
+    font-weight: 800;
+    font-size: 1.2rem;
+    line-height: 19px;
+    cursor: pointer;
+  }
+
+  span {
+    color: #452cdd;
+  }
+
+  p {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    margin-top: 4px;
+    font-weight: 400;
+    font-size: 1rem;
+    line-height: 19px;
+  }
+
+  #right {
+    justify-content: flex-end;
+  }
 `;
 
 const ProductCard = ({data}) => {
@@ -57,11 +76,8 @@ const ProductCard = ({data}) => {
     return (
           <ItemContainer>
             <div className="img">
-            <img
-              src={url}
-              alt={data.title} 
-            />
-            <FontAwesomeIcon icon={faStar} size="2x" color="#d3d3d3"/>
+            <img src={url} alt={data.title} />
+            <FontAwesomeIcon id="icon" icon={faStar} size="lg" color="rgba(223, 223, 223, 0.81)"/>
              </div>
             <div className="first">
               {content}
@@ -72,8 +88,8 @@ const ProductCard = ({data}) => {
             </div>
     
             {data.sub_title && <p>{data.sub_title}</p>}
-            {data.price && <p>{`${data.price}원`}</p>}
-            {data.follower && <p>{data.follower}</p>}
+            {data.price && <p id="right">{`${data.price}원`}</p>}
+            {data.follower && <p id="right">{data.follower}</p>}
           </ItemContainer>
       )};
 

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect,useState } from "react";
 
 import styled from "styled-components";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -29,7 +29,6 @@ export const ItemContainer = styled.div`
       position: absolute;
       bottom: 0.7rem;
       right: 0.7rem;
-      color: rgba(223, 223, 223, 0.81);
     }
   }
 
@@ -114,38 +113,72 @@ export const ItemContainer = styled.div`
 `;
 
 const ProductCard = ({data}) => {
-    // const [isBookmark, setBookmark] = useState(false);
-    const url = data.image_url ? data.image_url : data.brand_image_url;
+  const [bookmarks, setBookmarks] = useState([]);
 
-    let content = '';
-    if (data.type === 'Category') content = <div>{`# ${data.title}`}</div>;
-    else if (data.type === 'Brand') content = <div>{data.brand_name}</div>;
-    else content = <div>{data.title}</div>;
+  useEffect(() => {
+    const storedBookmarks = JSON.parse(localStorage.getItem('bookmarks'));
+    if (storedBookmarks) {
+      setBookmarks(storedBookmarks);
+    }
+  }, []);
 
-    const numberComma =(number) => {
-        return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-      };
+  useEffect(() => {
+    localStorage.setItem('bookmarks', JSON.stringify(bookmarks));
+  }, [bookmarks]);
 
-    const CommaPrice = data.price ? numberComma(data.price) : "";
-    const CommaFollower = data.follower ? numberComma(data.follower) : "";
-    return (
-          <ItemContainer>
-            <div className="img">
-            <img src={url} alt={data.title} />
-            <FontAwesomeIcon id="icon" icon={faStar} size="lg" color="rgba(223, 223, 223, 0.81)"/>
-             </div>
-            <div className="first">
-              {content}
-              {data.type === "Brand" && <div>관심고객수</div>}
-              {data.discountPercentage && (
-                <span>{`${data.discountPercentage}%`}</span>
-              )}
-            </div>
-    
-            {data.sub_title && <p>{data.sub_title}</p>}
-            {data.price && <p id="right">{`${CommaPrice}원`}</p>}
-            {data.follower && <p id="right">{CommaFollower}</p>}
-          </ItemContainer>
-      )};
+  const handleBookmarkClick = () => {
+    const isAlreadyBookmarked = bookmarks.some((bookmark) => bookmark.title === data.title);
+    if (isAlreadyBookmarked) {
+      const updatedBookmarks = bookmarks.filter((bookmark) => bookmark.title !== data.title);
+      setBookmarks(updatedBookmarks);
+      console.log('북마크가 삭제되었습니다.');
+    } else {
+      setBookmarks([...bookmarks, data]);
+      console.log('북마크가 추가되었습니다.');
+    }
+  };
+
+  const url = data.image_url ? data.image_url : data.brand_image_url;
+
+  let content = '';
+  if (data.type === 'Category') content = <div>{`# ${data.title}`}</div>;
+  else if (data.type === 'Brand') content = <div>{data.brand_name}</div>;
+  else content = <div>{data.title}</div>;
+
+  const numberComma = (number) => {
+    return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+  };
+
+  const CommaPrice = data.price ? numberComma(data.price) : '';
+  const CommaFollower = data.follower ? numberComma(data.follower) : '';
+
+  const isBookmarked = bookmarks.some((bookmark) => bookmark.title === data.title);
+
+  return (
+    <ItemContainer>
+      <div className="img">
+        <img src={url} alt={data.title} />
+        <FontAwesomeIcon
+          id="icon"
+          icon={faStar}
+          size="lg"
+          color={isBookmarked ? '#FFD361' : 'rgba(223, 223, 223, 0.81)'}
+          onClick={handleBookmarkClick}
+          style={{ cursor: 'pointer' }}
+        />
+      </div>
+
+      <div className="first">
+        {content}
+        {data.type === 'Brand' && <div>관심고객수</div>}
+        {data.discountPercentage && <span>{`${data.discountPercentage}%`}</span>}
+      </div>
+
+      {data.sub_title && <p>{data.sub_title}</p>}
+      {data.price && <p id="right">{`${CommaPrice}원`}</p>}
+      {data.follower && <p id="right">{CommaFollower}</p>}
+    </ItemContainer>
+  );
+};
 
 export default ProductCard;

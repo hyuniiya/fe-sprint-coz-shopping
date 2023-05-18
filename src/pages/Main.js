@@ -1,5 +1,26 @@
-const Main = () => {
-  return <div>Main</div>;
-};
+import { useState, useEffect } from "react";
+import ProductList from "../components/ProductList";
+import styled from "styled-components";
 
-export default Main;
+const MainContainer = styled.section`
+    width: 100%;
+    max-width: 82rem;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+`;
+
+const Main = () => {
+    return (
+    <MainContainer>
+      <ProductList />
+    </MainContainer>
+  )
+};
+  
+  export default Main;
+
+
+
+

@@ -11,6 +11,7 @@ export const DropdownMenu = styled.nav `
     top: 5rem;
     right: 4rem;
     
+    
     :after { 
         content:""; 
         position: absolute; 
@@ -21,21 +22,16 @@ export const DropdownMenu = styled.nav `
         border-bottom: 30px solid #fff;
     }
 
-    .dropdownItem {
-    width: 6rem;
-    margin-left: 8rem;
-    background-color: #fff;
-    box-shadow: 0px -1px 3px 5px rgba(0, 0, 0, 0.1);
-    -webkit-box-shadow: 0px -2px 8px 5px rgba(0, 0, 0, 0.1);
-    }
-
     ul {
+    width: 13rem;
+    margin-left: 8rem;
     display: flex;
     flex-direction: column;
     border-radius: 1rem;
     background-color: #fff;
     box-shadow: 0px -2px 8px 5px rgba(0, 0, 0, 0.1);
     -webkit-box-shadow: 0px -2px 8px 5px rgba(0, 0, 0, 0.1);
+    
 
 
     > li {
@@ -59,7 +55,6 @@ export const DropdownMenu = styled.nav `
 function Dropdown() {
     return (
         <DropdownMenu>
-            <div className="dropdownItem"></div>
             <ul>
                 <li>OOO님, 안녕하세요!</li>
                 <li>

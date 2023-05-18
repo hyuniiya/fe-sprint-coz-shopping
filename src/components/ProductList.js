@@ -35,6 +35,7 @@ const ProductListContainer = styled.div`
 export default function ProductList() {
     const [products, setProducts] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
+    
   
     useEffect(() => {
       getProducts();

@@ -17,7 +17,8 @@ export const HeaderTitleBox = styled.header`
     box-shadow: 0px 8px 8px rgba(0, 0, 0, 0.1);
     -webkit-box-shadow: 0px 8px 8px rgba(0, 0, 0, 0.1);
     -moz-box-shadow: 0px 8px 8px rgba(0, 0, 0, 0.1);
-
+    z-index:1;
+    
     .header-wrapper {
         position: relative;
         display: flex;

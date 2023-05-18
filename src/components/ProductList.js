@@ -4,21 +4,32 @@ import styled from "styled-components";
 
 const ProductListContainer = styled.div`
   display: flex;
-  align-items: center;
+  flex-direction: column;
+  align-items: flex-start;
   font-weight: 600;
-  font-size: 24px;
+  font-size: 26px;
   line-height: 29px;
   color: #000;
-  margin-top: 3rem;
+  margin-top: 1rem;
+
+  h2 {
+    font-weight: 600;
+    position: sticky;
+    top: 0;
+    left: 0;
+    background-color: #fff;
+
+    margin-bottom: 0.5rem;
+  }
+
+  @media (max-width: 768px) {
+    margin-top: 0.5rem;
 
     h2 {
-        top: 8rem;
-        left: 10rem;
-        position: absolute;
-        transform: translateX(10%);
-        font-weight: 600;
-
+      font-size: 20px;
+      line-height: 24px;
     }
+  }
 `;
 
 export default function ProductList() {

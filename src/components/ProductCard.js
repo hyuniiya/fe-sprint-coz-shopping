@@ -5,31 +5,30 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faStar } from "@fortawesome/free-solid-svg-icons";
 
 export const ItemContainer = styled.div`
-    left: -5rem; 
     position: relative;
     display: flex;
     flex-direction: column;
     width: calc(100% / 4);
-    height: 16rem;
+    height: 13rem;
 
   .img {
     position: relative;
-    width: 18rem;
-    height: 16rem;
+    width: 100%;
+    height: 13rem;
     border: 1px solid rgba(0, 0, 0, 0.1);
     border-radius: 1.2rem;
     cursor: pointer;
 
     img {
-      width: 20rem;
-      height: 16rem;
+      width: 100%;
+      height: 13rem;
       border-radius: 1.2rem;
     }
 
     #icon {
       position: absolute;
-      bottom: 1rem;
-      right: -0.5rem;
+      bottom: 0.7rem;
+      right: 0.7rem;
       color: rgba(223, 223, 223, 0.81);
     }
   }
@@ -65,6 +64,52 @@ export const ItemContainer = styled.div`
 
   #right {
     justify-content: flex-end;
+  }
+
+  @media (max-width: 768px) {
+    width: calc(100% / 2);
+
+    .img {
+      img {
+        width: 100%;
+        height: 12rem;
+      }
+    }
+
+    .first {
+      font-size: 1rem;
+      margin-top: 0.5rem;
+      margin-left: 0.5rem;
+    }
+
+    p {
+      font-size: 0.9rem;
+      margin-top: 0.3rem;
+      margin-left: 0.5rem;
+    }
+  }
+
+  @media (max-width: 480px) {
+    width: 100%;
+
+    .img {
+      img {
+        width: 100%;
+        height: 10rem;
+      }
+    }
+
+    .first {
+      font-size: 0.9rem;
+      margin-top: 0.4rem;
+      margin-left: 0.4rem;
+    }
+
+    p {
+      font-size: 0.8rem;
+      margin-top: 0.2rem;
+      margin-left: 0.4rem;
+    }
   }
 `;
 

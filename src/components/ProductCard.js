@@ -130,7 +130,6 @@ const ModalContent = styled.div`
   height: 20rem;
   border-radius: 12px;
   display: flex;
- 
   background-color: #ffffff;
   padding: 1rem;
 `;

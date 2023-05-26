@@ -1,4 +1,6 @@
 import { useEffect,useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { addToBookmark, removeFromBookmark } from "../redux/bookmarkActions";
 
 import styled from "styled-components";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -143,31 +145,27 @@ const CloseButton = styled(FontAwesomeIcon)`
   cursor: pointer;
 `;
 
-const ProductCard = ({data}) => {
-  const [bookmarks, setBookmarks] = useState(
-    JSON.parse(localStorage.getItem('bookmarks')) || []
-  );
-  
+const ProductCard = ({data, handleModalOpen}) => {
+  const dispatch = useDispatch();
+  const bookmarks = useSelector((state) => state.bookmarkReducer.bookmarks);
+  const isBookmark = bookmarks.some((bookmark) => bookmark === data.id);
+
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const handleImageClick = () => {
     setIsModalOpen(true);
   };
 
-
   useEffect(() => {
-    localStorage.setItem('bookmarks', JSON.stringify(bookmarks));
+    localStorage.setItem("bookmarks", JSON.stringify(bookmarks));
   }, [bookmarks]);
-  
-  const handleBookmarkClick = () => {
-    const updatedBookmarks = bookmarks.filter((bookmark) => bookmark.title !== data.title);
-    const message = updatedBookmarks.length === bookmarks.length ? '추가' : '삭제';
 
-    setBookmarks((prevBookmarks) =>
-      prevBookmarks.length === updatedBookmarks.length ? [...prevBookmarks, data] : updatedBookmarks
-    );
+  const handleRemoveBookmark = (itemId) => {
+    dispatch(removeFromBookmark(itemId));
+  };
 
-    console.log(`북마크가 ${message}되었습니다.`);
+  const handleAddBookmark = (itemId) => {
+    dispatch(addToBookmark(itemId));
   };
 
   const url = data.image_url ? data.image_url : data.brand_image_url;
@@ -199,7 +197,13 @@ const ProductCard = ({data}) => {
           icon={faStar}
           size="lg"
           color={isBookmarked ? '#FFD361' : 'rgba(223, 223, 223, 0.81)'}
-          onClick={handleBookmarkClick}
+          onClick={() => {
+            if (isBookmarked) {
+              handleRemoveBookmark(data.title); // 북마크 제거
+            } else {
+              handleAddBookmark(data.title); // 북마크 추가
+            }
+          }}
           style={{ cursor: 'pointer' }}
         />
       </div>

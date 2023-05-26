@@ -1,8 +1,8 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { useState, useEffect } from "react";
 
-import Header from "./components/Header";
-import Footer from "./components/Footer";
+import Header from "./common/components/Header";
+import Footer from "./common/components/Footer";
 import Main from "./pages/Main";
 import ProductsList from "./pages/ProductsList";
 import Bookmark from "./pages/Bookmark";

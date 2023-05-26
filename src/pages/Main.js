@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import ProductList from "../components/ProductList";
+import ProductList from "../common/components/ProductList";
 import styled from "styled-components";
 
 const MainContainer = styled.section`
